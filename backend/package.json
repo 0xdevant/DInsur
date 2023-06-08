@@ -1,0 +1,34 @@
+{
+	"name": "DInsur",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"deploy-function-consumer:mumbai": "npx hardhat run ./scripts/1_function_consumer_deploy.js --network POLYGON_MUMBAI",
+		"function-sub:mumbai": "npx hardhat run ./scripts/2_functions_sub.js --network POLYGON_MUMBAI",
+		"deploy-main:mumbai": "npx hardhat run ./scripts/3_dinsur_deploy.js --network POLYGON_MUMBAI",
+		"deploy-main:sepolia": "npx hardhat run ./scripts/3_dinsur_deploy.js --network ETH_SEPOLIA",
+		"request:mumbai": "npx hardhat run ./scripts/4_request.js --network POLYGON_MUMBAI",
+		"request:sepolia": "npx hardhat run ./scripts/4_request.js --network ETH_SEPOLIA",
+		"test": "npx hardhat test",
+		"build": "npx hardhat compile",
+		"node": "npx hardhat node"
+	},
+	"dependencies": {
+		"@chainlink/contracts": "^0.6.1",
+		"@chainlink/env-enc": "^1.0.5",
+		"@openzeppelin/contracts": "^4.9.0",
+		"@openzeppelin/contracts-upgradeable": "^4.9.0",
+		"axios": "^1.4.0",
+		"dotenv": "^16.1.1",
+		"eth-crypto": "^2.6.0",
+		"is-http-url": "^2.0.0",
+		"prompt-sync": "^4.2.0",
+		"vm2": "^3.9.19"
+	},
+	"devDependencies": {
+		"@nomicfoundation/hardhat-toolbox": "^1.0.2",
+		"@openzeppelin/test-helpers": "^0.5.16",
+		"bignumber.js": "^9.1.1",
+		"hardhat": "^2.10.1"
+	}
+}

@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.button-style {
+  @apply bg-blue-600 px-4 py-2 rounded-full text-white min-w-[100px]
+}
+
+.input-field-style {
+  @apply border-gray-100 border-2 rounded-lg p-4 flex justify-center items-start flex-col flex-wrap
+}
