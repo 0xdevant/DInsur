@@ -2,10 +2,11 @@
 
 ## Getting Started
 
-First, run the development server:
+Install the packages and run the development server:
 
 ```zsh
-% npm run dev
+$ pnpm install
+$ pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.

@@ -1,6 +1,10 @@
 # Backend
 
-This contract allows users to purchase different types of insurance plans like Travel Insurance, and claim automatically in ETH in case there is an unfortunate incident. The verification of the claim will be achieved by utilizing Chainlink's _Functions_ feature, to fetch data in real time from Decentralized Oracle Networks (DONs). Depending on the **insured amount** and the **duration of the benefit period** the user desired, the price of the policy could vary.
+This contract allows users to purchase different types of insurance plans like Travel Insurance, and claim automatically in ETH in case there is an unfortunate incident.
+
+The verification of the claim will be achieved by utilizing Chainlink's _Functions_ feature, to fetch data in real time from Decentralized Oracle Networks (DONs).
+
+Depending on the **insured amount** and the **duration of the benefit period** the user desired, the price of the policy could vary.
 
 ## Getting Started
 
