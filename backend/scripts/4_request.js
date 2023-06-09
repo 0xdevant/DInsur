@@ -1,8 +1,8 @@
 const ethcrypto = require("eth-crypto");
 const axios = require("axios");
 const fs = require("fs").promises;
-const { functionsConsumerAddress, subscriptionID } = require("../constants");
 const moment = require("moment/moment");
+const { functionsConsumerAddress, subscriptionID } = require("../constants");
 
 async function main() {
   // Provider config currently set for Polygon Mumbai
@@ -41,7 +41,7 @@ async function main() {
 
   const source = await fs.readFile("./Functions-request-source.js", "utf8");
   // TODO: should be passed via API call
-  const args = [moment().format("YYYY-MM-DD"), "UO624", false];
+  const args = [moment().format("YYYY-MM-DD"), "CX105", false];
   // const secrets = { apiKey: process.env.COINMARKETCAP_API_KEY };
 
   // Create an oracle contract object.
