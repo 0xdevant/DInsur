@@ -5,8 +5,14 @@
 
 // Refer to https://github.com/smartcontractkit/functions-hardhat-starter-kit#javascript-code
 
+const moment = require("moment/moment");
+
+function checkIfFlightDelayed(scheduledTime, depatureTime) {
+  return moment(depatureTime, "HH:mm").isAfter(moment(scheduledTime, "HH:mm"));
+}
+
 // Arguments can be provided when a request is initated on-chain and used in the request source code as shown below
-const date = args[0];
+const momented_date = args[0];
 const flightNo = args[1].replace(" ", "");
 const isArrival = args[2];
 
@@ -18,7 +24,7 @@ console.log(
 
 // construct the HTTP Request object. See: https://github.com/smartcontractkit/functions-hardhat-starter-kit#javascript-code
 // params used for URL query parameters
-// Example of query: https://min-api.cryptocompare.com/data/pricemultifull?fsyms=ETH&tsyms=USD
+// Example of query: https://www.hongkongairport.com/flightinfo-rest/rest/flights/past?date=2023-06-09&lang=en&cargo=false&arrival=false
 const flightScheduleInfoRequest = Functions.makeHttpRequest({
   url: url,
   params: {
@@ -36,20 +42,32 @@ if (flightScheduleInfoResponse.error) {
   throw Error("Request failed");
 }
 
-// const data = flightScheduleInfoResponse["data"];
-const data = flightScheduleInfoResponse;
+const data = flightScheduleInfoResponse["data"];
 if (data.problemNo) {
   console.error(data.message);
   throw Error(`Functional error. Read message: ${data.message}`);
 }
 
 const isDelayed = 0; // 0: not delayed 1: delayed
-// extract the list of flight info
-const flightList = data.dates;
-for (const flights of flightList) {
-  if (flights.flight.no == flightNo) {
+
+for (const dateInfo of data) {
+  if (momented_date === dateInfo.date) {
+    for (timeslot of dateInfo.list) {
+      for (flightInfo of timeslot.flight) {
+        // extract the list of flight info
+        const reg = /\w+:\w+/g;
+        if (flightInfo.no === flightNo) {
+          const depatureTime = timeslot.status.match(reg)[0];
+          if (checkIfFlightDelayed(timeslot.time, depatureTime)) {
+            isDelayed = 1;
+          }
+          isDelayed = 0;
+        }
+      }
+    }
   }
 }
+
 console.log(`${flightNo} is: ${isDelayed ? "delayed" : "not delayed"}`);
 
 // Solidity doesn't support decimals so multiply by 100 and round to the nearest integer

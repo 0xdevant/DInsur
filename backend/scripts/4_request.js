@@ -2,6 +2,7 @@ const ethcrypto = require("eth-crypto");
 const axios = require("axios");
 const fs = require("fs").promises;
 const { functionsConsumerAddress, subscriptionID } = require("../constants");
+const moment = require("moment/moment");
 
 async function main() {
   // Provider config currently set for Polygon Mumbai
@@ -38,11 +39,9 @@ async function main() {
   // Gas limit for the Chainlink Functions request
   const requestGas = 5500000;
 
-  // Default example
   const source = await fs.readFile("./Functions-request-source.js", "utf8");
-  const args = [
-    /*date, flightNo, isArrival*/
-  ];
+  // TODO: should be passed via API call
+  const args = [moment().format("YYYY-MM-DD"), "UO624", false];
   // const secrets = { apiKey: process.env.COINMARKETCAP_API_KEY };
 
   // Create an oracle contract object.
